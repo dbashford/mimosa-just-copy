@@ -22,7 +22,7 @@ _removeFilesFromWorkflow = (mimosaConfig, options, next) ->
   indices = []
 
   for file, i in options.files
-    for folder in mimosaConfig.justCopy.folders
+    for folder in mimosaConfig.justCopy.paths
       if file.inputFileName.indexOf(folder) is 0
         indices.unshift i
         break
@@ -53,7 +53,7 @@ _placeFilesIntoWorkflow = (mimosaConfig, options, next) ->
 
 _removeExtensionFileAndEndWorkflow = (mimosaConfig, options, next) ->
   found = false
-  for folder, i in mimosaConfig.justCopy.folders
+  for folder, i in mimosaConfig.justCopy.paths
     if options.inputFile.indexOf(folder) is 0
       found = true
       break
@@ -66,7 +66,7 @@ _removeExtensionFileAndEndWorkflow = (mimosaConfig, options, next) ->
 _removeFileAndEndWorkflow = (mimosaConfig, options, next) ->
   files = []
   for file, i in options.files
-    for folder in mimosaConfig.justCopy.folders
+    for folder in mimosaConfig.justCopy.paths
       if file.inputFileName.indexOf(folder) is 0
         files.push file.inputFileName
         break
