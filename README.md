@@ -7,6 +7,8 @@ A module that will copy assets without running them through the rest of Mimosa's
 
 For more information regarding Mimosa, see http://mimosajs.com
 
+Note: This module is compatible with Mimosa `0.14.0` and above.
+
 ## Usage
 
 Add `'just-copy'` to your list of modules.  That's all!  Mimosa will install the module for you when you start up.
