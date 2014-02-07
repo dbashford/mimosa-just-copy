@@ -2,11 +2,13 @@
 
 fs = require 'fs'
 
-logger = require 'logmimosa'
-
 config = require './config'
 
+logger = null
+
 registration = (mimosaConfig, register) ->
+  logger = mimosaConfig.log
+
   ext = mimosaConfig.extensions
   register ['remove', 'cleanFile'], 'init', _removeFileAndEndWorkflow, [mimosaConfig.copy.extensions..., ext.javascript...]
   register ['remove', 'cleanFile'], 'init', _removeExtensionFileAndEndWorkflow, [ext.css..., ext.template...]
