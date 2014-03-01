@@ -8,10 +8,10 @@ exports.placeholder = ->
   """
   \t
 
-    # justCopy:     # Configuration for the just-copy module
-      # paths:[]    # List of file or folder paths, the contents of which Mimosa will only copy
-                    # from the watch.sourceDir to the watch.compiledDir. Paths can be relative
-                    # to watch.sourceDir or absolute.
+    justCopy:     # Configuration for the just-copy module
+      paths:[]    # List of file or folder paths, the contents of which Mimosa will only copy
+                  # from the watch.sourceDir to the watch.compiledDir. Paths can be relative
+                  # to watch.sourceDir or absolute.
   """
 
 exports.validate = (config, validators) ->
