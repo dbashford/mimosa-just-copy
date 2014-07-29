@@ -25,9 +25,10 @@ justCopy:
 ```
 
 * `paths`: Can be either a list of file or folder paths or an object with src dest attributes:
-  ```
+```
    {
       src: "some/relative/src"
       dest: "some/relative/dest"
-    }```
+    }
+```
 * The contents of `paths` will only be copied from the `watch.sourceDir` to the `watch.compiledDir`. Paths can be relative to watch.sourceDir or absolute.
