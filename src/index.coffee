@@ -1,6 +1,7 @@
 "use strict"
 
 fs = require 'fs'
+_ = require 'underscore'
 
 config = require './config'
 
@@ -24,21 +25,26 @@ _removeFilesFromWorkflow = (mimosaConfig, options, next) ->
   indices = []
 
   for file, i in options.files
-    for folder in mimosaConfig.justCopy.paths
-      if file.inputFileName.indexOf(folder) is 0
+    for entry in mimosaConfig.justCopy.paths
+      folder = if _.isString entry then entry else entry.src
+      unless file.inputFileName.indexOf(folder) is -1
         indices.unshift i
         break
-
   for index in indices
-    _removeFileFromWorkflow options, index
+    src = if entry.src then mimosaConfig.watch.sourceDir+"/"+entry.src else mimosaConfig.watch.sourceDir
+    dest = if entry.dest then mimosaConfig.watch.compiledDir+"/"+entry.dest else mimosaConfig.watch.compiledDir
+    _removeFileFromWorkflow options, index, src, dest
 
   next()
 
-_removeFileFromWorkflow = (options, index) ->
+_removeFileFromWorkflow = (options, index, src, dest) ->
   unless options.justCopyFiles
     options.justCopyFiles = []
   removed = options.files.splice index, 1
-  options.justCopyFiles.push removed[0]
+  options.justCopyFiles.push
+    copyFile: removed[0]
+    src: src
+    dest: dest
 
 _placeFilesIntoWorkflow = (mimosaConfig, options, next) ->
   return next() unless options.justCopyFiles
@@ -46,8 +52,12 @@ _placeFilesIntoWorkflow = (mimosaConfig, options, next) ->
   unless options.files
     options.files = []
 
-  for copyFile in options.justCopyFiles
-    copyFile.outputFileName = copyFile.inputFileName.replace mimosaConfig.watch.sourceDir, mimosaConfig.watch.compiledDir
+  for entry in options.justCopyFiles
+    {copyFile, src, dest} = entry
+
+    oldFilename = copyFile.inputFileName
+    copyFile.outputFileName = copyFile.inputFileName.replace src, dest
+    logger.debug ("Moving #{oldFilename} to #{copyFile.outputFileName}")
     copyFile.outputFileText = copyFile.inputFileText
     options.files.push copyFile
 
