@@ -1,6 +1,6 @@
 {
   "name": "mimosa-just-copy",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/dbashford/mimosa-just-copy",
   "author": "David Bashford",
   "description": "A Mimosa module to simply copy assets in folder(s) without doing anything else to them.",
@@ -19,9 +19,6 @@
     "mmodule",
     "copy"
   ],
-  "dependencies": {
-    "underscore": "1.6.0"
-  },
   "license": "MIT",
   "engines": {
     "node": ">=0.10"

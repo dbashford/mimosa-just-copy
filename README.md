@@ -19,16 +19,22 @@ Any folders (or files) added to `justCopy.paths` will be copied from the `watch.
 
 ## Default Config
 
-```
-justCopy:
+```javascript
+justCopy: {
   paths:[]
+}
 ```
 
-* `paths`: Can be either a list of file or folder paths or an object with src dest attributes:
+* `paths`: Can be either a list of file or folder paths or an object with `src`/`dest` attributes. The contents of `paths` will only be copied from the `watch.sourceDir` to the `watch.compiledDir`. Paths can be relative to `watch.sourceDir` or absolute.
+
+## Example Config
+
+```javascript
+justCopy : {
+  "just/copy/this/whereMimosaWantsToCopyIt"
+  {
+    src: "but/copy/this",
+    dest: "someplace/specific"
+  }
+}
 ```
-   {
-      src: "some/relative/src"
-      dest: "some/relative/dest"
-    }
-```
-* The contents of `paths` will only be copied from the `watch.sourceDir` to the `watch.compiledDir`. Paths can be relative to watch.sourceDir or absolute.

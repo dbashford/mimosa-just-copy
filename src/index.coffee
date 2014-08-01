@@ -1,7 +1,6 @@
 "use strict"
 
 fs = require 'fs'
-_ = require 'underscore'
 
 config = require './config'
 
@@ -26,7 +25,7 @@ _removeFilesFromWorkflow = (mimosaConfig, options, next) ->
 
   for file, i in options.files
     for entry in mimosaConfig.justCopy.paths
-      folder = if _.isString entry then entry else entry.src
+      folder = if typeof entry is "string" then entry else entry.src
       unless file.inputFileName.indexOf(folder) is -1
         indices.unshift i
         break
