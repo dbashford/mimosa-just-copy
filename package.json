@@ -19,6 +19,9 @@
     "mmodule",
     "copy"
   ],
+  "dependencies": {
+    "underscore": "1.6.0"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=0.10"
